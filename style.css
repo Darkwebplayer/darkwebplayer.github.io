@@ -1063,10 +1063,10 @@ body.dark .work-links img {
 }
 
 .signatures {
-  inline-size: 150px;
+  inline-size: 100px;
 }
 
-body.light .signatures {
+body.dark .signatures {
   filter: invert(1);
 }
 
