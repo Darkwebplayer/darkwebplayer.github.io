@@ -24,6 +24,7 @@ export default defineNuxtConfig({
       ]
     }
   },
+  ssr:false,
   tailwindcss: {
     config: {
       darkMode: 'class',
