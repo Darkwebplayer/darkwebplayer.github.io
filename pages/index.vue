@@ -22,7 +22,6 @@
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
               <span class="gradient-text">Full Stack</span><br>
               <span class="text-gray-900 dark:text-gray-100">Web Developer</span><br>
-              <span class="gradient-text">& AI Enthusiast</span>
             </h1>
           </div>
 
@@ -143,8 +142,8 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <ProjectCard 
-            v-for="project in featuredProjects" 
+          <ProjectCard
+            v-for="project in featuredProjects"
             :key="project.slug"
             :project="project"
           />
@@ -232,7 +231,7 @@ const featuredProjects = [
     title: 'TACKPAD',
     subtitle: 'Next-gen productivity platform with AI integration',
     description: 'A revolutionary productivity tool that revolutionizes how users organize tasks, notes, timers, and workflows with complete customization freedom.',
-    image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: 'https://i.ibb.co/HLCr0Hrw/dev-tack-pad-pages-dev-board-BOARD-JGI9-XQU2-YU.png',
     tags: ['Nuxt.js', 'Vue.js', 'Cloudflare D1', 'AI Integration'],
     status: 'Active Development',
     link: 'https://tackpad.xyz/home'
@@ -242,7 +241,7 @@ const featuredProjects = [
     title: 'MOCKPROS',
     subtitle: 'AI-powered interview preparation platform',
     description: 'An intelligent mock interview platform that uses AI to provide personalized interview preparation with real-time feedback and performance analytics.',
-    image: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: 'https://i.ibb.co/G3Vm4Pgv/mockpros-in-interview-resume-1.png',
     tags: ['Vue.js', 'Django', 'AI/ML', 'WebRTC'],
     status: 'Live & Active',
     link: 'https://mockpros.in'
@@ -252,22 +251,23 @@ const featuredProjects = [
     title: 'HYRACORP',
     subtitle: 'Enterprise property management system',
     description: 'A comprehensive property management platform serving the Indian real estate market, streamlining rental processes from listing to lease management.',
-    image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: 'https://i.ibb.co/N66Q9C4f/hyracorp-com.png',
     tags: ['Nuxt.js', 'Django', 'PostgreSQL', 'AWS'],
     status: 'Live & Production',
     link: 'https://hyracorp.com'
   },
   {
-    slug: 'gigglejobs',
-    title: 'GIGGLEJOBS',
-    subtitle: 'Singapore-based workforce management platform',
-    description: 'A Singapore-based platform revolutionizing daily wage employment in the hospitality sector, connecting hotels with qualified temporary staff.',
-    image: 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=800',
-    tags: ['Nuxt.js', 'PrimeVue', 'PWA', 'Real-time'],
-    status: 'Ongoing Development',
-    link: 'https://gigglejobs.sg'
+    slug: 'car-resale',
+    title: 'Car Resale Platform',
+    subtitle: 'Innovative car marketplace solution',
+    description: 'Developing an innovative platform connecting car garages with potential buyers, streamlining the pre-owned vehicle marketplace.',
+    image: 'https://i.ibb.co/NdhVF8NN/carsale-darkwebplayer-nuxt-dev.png',
+    tags: ['Vue.js', 'Django', 'Elasticsearch', 'Real-time'],
+    status: 'Under Development',
+    link: 'https://carsale-darkwebplayer.nuxt.dev/'
   }
 ]
+
 </script>
 
 <style scoped>

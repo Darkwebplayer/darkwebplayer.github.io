@@ -11,8 +11,8 @@
 
       <!-- Contact Methods -->
       <div class="space-y-6">
-        <div 
-          v-for="contact in contactMethods" 
+        <div
+          v-for="contact in contactMethods"
           :key="contact.type"
           class="flex items-center space-x-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-300"
         >
@@ -21,7 +21,7 @@
           </div>
           <div>
             <p class="font-medium text-gray-900 dark:text-gray-100">{{ contact.label }}</p>
-            <a 
+            <a
               :href="contact.href"
               class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300"
             >
@@ -35,8 +35,8 @@
       <div>
         <h4 class="font-semibold text-gray-900 dark:text-gray-100 mb-4">Areas of Expertise:</h4>
         <ul class="space-y-2">
-          <li 
-            v-for="area in expertiseAreas" 
+          <li
+            v-for="area in expertiseAreas"
             :key="area"
             class="flex items-center space-x-2"
           >
@@ -151,13 +151,6 @@ const contactMethods = [
     icon: Phone
   },
   {
-    type: 'location',
-    label: 'Location',
-    value: 'Idukki, Kerala, India',
-    href: '#',
-    icon: MapPin
-  },
-  {
     type: 'portfolio',
     label: 'Portfolio',
     value: 'darkwebplayer.github.io',
@@ -176,17 +169,17 @@ const expertiseAreas = [
 
 const submitForm = async () => {
   isSubmitting.value = true
-  
+
   // Simulate form submission
   await new Promise(resolve => setTimeout(resolve, 2000))
-  
+
   // Create mailto link with form data
   const subject = encodeURIComponent(form.value.subject)
   const body = encodeURIComponent(`Name: ${form.value.name}\nEmail: ${form.value.email}\n\nMessage:\n${form.value.message}`)
   const mailtoLink = `mailto:amrithanadhm@gmail.com?subject=${subject}&body=${body}`
-  
+
   window.location.href = mailtoLink
-  
+
   // Reset form
   form.value = {
     name: '',
@@ -194,7 +187,7 @@ const submitForm = async () => {
     subject: '',
     message: ''
   }
-  
+
   isSubmitting.value = false
 }
 </script>

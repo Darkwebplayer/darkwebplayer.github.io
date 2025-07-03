@@ -13,23 +13,23 @@
               <span class="text-gray-400 dark:text-gray-500">•</span>
               <span class="text-gray-600 dark:text-gray-300 font-medium">{{ project.role }}</span>
             </div>
-            
+
             <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-gray-100">
               {{ project.title }}
             </h1>
-            
+
             <p class="text-xl text-primary-600 dark:text-primary-400 font-medium mb-6">
               {{ project.subtitle }}
             </p>
-            
+
             <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
               {{ project.overview }}
             </p>
 
             <div class="flex flex-wrap gap-4">
-              <a 
-                v-if="project.liveDemo" 
-                :href="project.liveDemo" 
+              <a
+                v-if="project.liveDemo"
+                :href="project.liveDemo"
                 target="_blank"
                 class="btn-primary"
               >
@@ -45,8 +45,8 @@
 
           <!-- Featured Image -->
           <div class="relative">
-            <img 
-              :src="project.featuredImage" 
+            <img
+              :src="project.featuredImage"
               :alt="project.title"
               class="w-full h-96 object-cover rounded-2xl shadow-lg"
             />
@@ -59,6 +59,30 @@
     <!-- Project Details -->
     <section class="section-padding bg-white dark:bg-gray-800">
       <div class="container-custom">
+          <!-- Image Gallery -->
+                  <div class="py-10">
+                    <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100">Project Gallery</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div
+                        v-for="(image, index) in project.gallery"
+                        :key="index"
+                        class="relative group cursor-pointer overflow-hidden rounded-lg"
+                        @click="openLightbox(index)"
+                      >
+                        <img
+                          :src="image.url"
+                          :alt="image.caption"
+                          class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+                        />
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                          <ZoomIn class="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                          <p class="text-white text-sm">{{ image.caption }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <!-- Main Content -->
           <div class="lg:col-span-2 space-y-12">
@@ -74,8 +98,8 @@
             <div>
               <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100">Key Features</h2>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div 
-                  v-for="feature in project.keyFeatures" 
+                <div
+                  v-for="feature in project.keyFeatures"
                   :key="feature"
                   class="flex items-start space-x-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg"
                 >
@@ -89,8 +113,8 @@
             <div>
               <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100">Challenges Solved</h2>
               <div class="space-y-4">
-                <div 
-                  v-for="challenge in project.challengesSolved" 
+                <div
+                  v-for="challenge in project.challengesSolved"
                   :key="challenge"
                   class="flex items-start space-x-3"
                 >
@@ -104,8 +128,8 @@
             <div v-if="project.innovationHighlights">
               <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100">Innovation Highlights</h2>
               <div class="space-y-4">
-                <div 
-                  v-for="highlight in project.innovationHighlights" 
+                <div
+                  v-for="highlight in project.innovationHighlights"
                   :key="highlight"
                   class="flex items-start space-x-3"
                 >
@@ -115,30 +139,7 @@
               </div>
             </div>
 
-            <!-- Image Gallery -->
-            <div>
-              <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100">Project Gallery</h2>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div 
-                  v-for="(image, index) in project.gallery" 
-                  :key="index"
-                  class="relative group cursor-pointer overflow-hidden rounded-lg"
-                  @click="openLightbox(index)"
-                >
-                  <img 
-                    :src="image.url" 
-                    :alt="image.caption"
-                    class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                    <ZoomIn class="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-                  <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-                    <p class="text-white text-sm">{{ image.caption }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+
           </div>
 
           <!-- Sidebar -->
@@ -170,14 +171,14 @@
             <div class="card p-6">
               <h3 class="font-semibold text-lg mb-4 text-gray-900 dark:text-gray-100">Tech Stack</h3>
               <div class="space-y-4">
-                <div 
-                  v-for="(techs, category) in project.techStack" 
+                <div
+                  v-for="(techs, category) in project.techStack"
                   :key="category"
                 >
                   <p class="text-sm text-gray-500 dark:text-gray-400 mb-2 capitalize">{{ category }}</p>
                   <div class="flex flex-wrap gap-2">
-                    <span 
-                      v-for="tech in techs" 
+                    <span
+                      v-for="tech in techs"
                       :key="tech"
                       class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs font-medium rounded-full"
                     >
@@ -192,8 +193,8 @@
             <div v-if="project.businessImpact" class="card p-6">
               <h3 class="font-semibold text-lg mb-4 text-gray-900 dark:text-gray-100">Business Impact</h3>
               <div class="space-y-3">
-                <div 
-                  v-for="impact in project.businessImpact" 
+                <div
+                  v-for="impact in project.businessImpact"
                   :key="impact"
                   class="flex items-start space-x-2"
                 >
@@ -207,18 +208,18 @@
             <div class="card p-6">
               <h3 class="font-semibold text-lg mb-4 text-gray-900 dark:text-gray-100">Links</h3>
               <div class="space-y-3">
-                <a 
-                  v-if="project.liveDemo" 
-                  :href="project.liveDemo" 
+                <a
+                  v-if="project.liveDemo"
+                  :href="project.liveDemo"
                   target="_blank"
                   class="flex items-center space-x-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300"
                 >
                   <ExternalLink class="w-4 h-4" />
                   <span>Live Demo</span>
                 </a>
-                <a 
-                  v-if="project.github" 
-                  :href="project.github" 
+                <a
+                  v-if="project.github"
+                  :href="project.github"
                   target="_blank"
                   class="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-200 transition-colors duration-300"
                 >
@@ -239,8 +240,8 @@
           Other <span class="gradient-text">Projects</span>
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <ProjectCard 
-            v-for="relatedProject in relatedProjects" 
+          <ProjectCard
+            v-for="relatedProject in relatedProjects"
             :key="relatedProject.slug"
             :project="relatedProject"
           />
@@ -262,13 +263,13 @@ const projectsData = {
     title: 'TACKPAD',
     subtitle: 'Next-gen productivity platform with AI integration',
     status: 'Active Development',
-    role: 'Core Maintainer & Lead Developer',
+    role: 'Core Maintainer',
     overview: 'A revolutionary productivity tool that revolutionizes how users organize tasks, notes, timers, and workflows with complete customization freedom.',
     detailedDescription: 'TACKPAD represents a paradigm shift in productivity tools, offering users unprecedented flexibility in organizing their digital workspace. Unlike traditional productivity apps that force users into rigid structures, TACKPAD provides a canvas-like interface where every component can be positioned, resized, and customized according to individual preferences and workflows.',
-    featuredImage: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    featuredImage: 'https://i.ibb.co/HLCr0Hrw/dev-tack-pad-pages-dev-board-BOARD-JGI9-XQU2-YU.png',
     liveDemo: 'https://tackpad.xyz/home',
     timeline: '2024 - Present',
-    teamSize: 'Solo Developer',
+    teamSize: 'Two',
     keyFeatures: [
       'Drag-and-drop workspace customization',
       'Real-time collaboration capabilities',
@@ -300,21 +301,13 @@ const projectsData = {
     },
     gallery: [
       {
-        url: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
-        caption: 'Main dashboard with customizable workspace'
+        url: 'https://i.ibb.co/hRV8cmYg/dev-tack-pad-pages-dev-home.png',
+        caption: 'Home Page'
       },
       {
-        url: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
+        url: 'https://i.ibb.co/HLCr0Hrw/dev-tack-pad-pages-dev-board-BOARD-JGI9-XQU2-YU.png',
         caption: 'Task management interface'
       },
-      {
-        url: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800',
-        caption: 'Real-time collaboration features'
-      },
-      {
-        url: 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=800',
-        caption: 'Analytics and insights dashboard'
-      }
     ]
   },
   'mockpros': {
@@ -324,7 +317,7 @@ const projectsData = {
     role: 'Founder & Lead Developer',
     overview: 'An intelligent mock interview platform that uses AI to provide personalized interview preparation with real-time feedback and performance analytics.',
     detailedDescription: 'MOCKPROS leverages cutting-edge AI technology to simulate realistic interview scenarios, providing users with comprehensive feedback on their performance. The platform analyzes speech patterns, confidence levels, and content quality to deliver actionable insights for improvement.',
-    featuredImage: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    featuredImage: 'https://i.ibb.co/G3Vm4Pgv/mockpros-in-interview-resume-1.png',
     liveDemo: 'https://mockpros.in',
     timeline: '2024',
     teamSize: 'Solo Developer',
@@ -366,21 +359,9 @@ const projectsData = {
     },
     gallery: [
       {
-        url: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
+        url: 'https://i.ibb.co/PG6X2zBP/mockpros-in-interview-resume.png',
         caption: 'AI-powered interview simulation interface'
       },
-      {
-        url: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
-        caption: 'Real-time feedback and analysis'
-      },
-      {
-        url: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800',
-        caption: 'Performance analytics dashboard'
-      },
-      {
-        url: 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=800',
-        caption: 'Personalized learning paths'
-      }
     ]
   },
   'hyracorp': {
@@ -390,7 +371,7 @@ const projectsData = {
     role: 'CTO & Lead Architect',
     overview: 'A comprehensive property management platform serving the Indian real estate market, streamlining rental processes from listing to lease management.',
     detailedDescription: 'HYRACORP is an enterprise-grade property management solution designed specifically for the Indian real estate market. The platform handles the complete lifecycle of property management, from initial listing to tenant management, rent collection, and maintenance tracking.',
-    featuredImage: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    featuredImage: 'https://i.ibb.co/N66Q9C4f/hyracorp-com.png',
     liveDemo: 'https://hyracorp.com',
     timeline: '2024',
     teamSize: '4 Developers',
@@ -405,7 +386,6 @@ const projectsData = {
       'Maintenance request tracking'
     ],
     challengesSolved: [
-      'Architected system handling 500+ properties',
       'Implemented advanced search and filtering for property discovery',
       'Created automated workflow engine for rental processes',
       'Developed comprehensive reporting system for property analytics'
@@ -427,31 +407,20 @@ const projectsData = {
     },
     gallery: [
       {
-        url: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800',
+        url: 'https://i.ibb.co/hFPhhJGz/2025-07-03-T17-13-52-054836517-05-30.png',
         caption: 'Property management dashboard'
       },
-      {
-        url: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
-        caption: 'Tenant management interface'
-      },
-      {
-        url: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
-        caption: 'Financial reporting system'
-      },
-      {
-        url: 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=800',
-        caption: 'Mobile-responsive property listings'
-      }
+
     ]
   },
   'gigglejobs': {
     title: 'GIGGLEJOBS',
     subtitle: 'Singapore-based workforce management platform',
     status: 'Ongoing Development',
-    role: 'Frontend Lead Developer',
+    role: 'Frontend  Developer',
     overview: 'A Singapore-based platform revolutionizing daily wage employment in the hospitality sector, connecting hotels with qualified temporary staff.',
     detailedDescription: 'GIGGLEJOBS addresses the unique challenges of the Singapore hospitality industry by providing a sophisticated platform for managing temporary workforce. The system ensures compliance with local employment laws while providing seamless matching between employers and workers.',
-    featuredImage: 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    featuredImage: 'https://i.ibb.co/j9h9wGjz/2025-07-03-T17-19-44-759060155-05-30.png',
     liveDemo: 'https://gigglejobs.sg',
     timeline: '2024 - Present',
     teamSize: 'International Team',
@@ -483,25 +452,75 @@ const projectsData = {
       realtime: ['WebSocket'],
       mobile: ['Native app-like experience']
     },
-    gallery: [
-      {
-        url: 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=800',
-        caption: 'Job matching interface'
-      },
-      {
-        url: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
-        caption: 'Shift scheduling system'
-      },
-      {
-        url: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
-        caption: 'Mobile-first design'
-      },
-      {
-        url: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800',
-        caption: 'Performance tracking dashboard'
-      }
-    ]
-  }
+
+  },
+  'car-resale': {
+     title: 'Car Resale Platform',
+     subtitle: 'Innovative car marketplace solution',
+     status: 'Under Development',
+     role: 'Full Stack Developer',
+     overview: 'Developing an innovative platform connecting car garages with potential buyers, streamlining the pre-owned vehicle marketplace.',
+     detailedDescription: 'The Car Resale Platform is designed to revolutionize the pre-owned vehicle marketplace by creating a seamless connection between car garages and potential buyers. The platform features advanced search capabilities, real-time inventory management, and comprehensive vehicle history tracking to ensure transparency and trust in the car buying process.',
+     featuredImage: 'https://i.ibb.co/NdhVF8NN/carsale-darkwebplayer-nuxt-dev.png',
+     liveDemo: '#',
+     timeline: '2024 - Present',
+     teamSize: 'Solo Developer',
+     keyFeatures: [
+       'Advanced vehicle search with multiple filters',
+       'Real-time inventory management for garages',
+       'Vehicle history and inspection reports',
+       'Integrated comparison tools',
+       'Secure payment processing',
+       'Appointment scheduling system',
+       'Review and rating system',
+       'Mobile-responsive design',
+       'Multi-location garage support',
+       'Automated pricing suggestions'
+     ],
+     challengesSolved: [
+       'Implementing complex search algorithms with Elasticsearch',
+       'Creating real-time inventory synchronization across multiple garages',
+       'Developing advanced filtering system for vehicle specifications',
+       'Building secure transaction processing workflow',
+       'Designing scalable architecture for high-volume listings'
+     ],
+     innovationHighlights: [
+       'Advanced Elasticsearch integration for lightning-fast search',
+       'Real-time inventory updates with WebSocket connections',
+       'Smart pricing algorithms based on market analysis',
+       'Comprehensive vehicle comparison interface',
+       'Automated garage management tools'
+     ],
+     businessImpact: [
+       'Streamlining the pre-owned vehicle marketplace',
+       'Reducing time-to-sale for car garages',
+       'Improving buyer confidence through transparency',
+       'Automating manual inventory management processes'
+     ],
+     techStack: {
+       frontend: ['Vue.js', 'Nuxt.js', 'Tailwind CSS'],
+       backend: ['Django REST Framework'],
+       database: ['PostgreSQL'],
+       search: ['Elasticsearch'],
+       realtime: ['WebSocket', 'Redis'],
+       storage: ['AWS S3'],
+       deployment: ['Docker', 'AWS']
+     },
+     gallery: [
+       {
+         url: 'https://i.ibb.co/NdhVF8NN/carsale-darkwebplayer-nuxt-dev.png',
+         caption: 'Car marketplace homepage with advanced search'
+       },
+       {
+             url: 'https://i.ibb.co/gb4gxvHB/carsale-darkwebplayer-nuxt-dev-admin.png',
+             caption: 'Car marketplace homepage with advanced search'
+           },
+           {
+                 url: 'https://i.ibb.co/mCgn90zq/2025-07-03-T17-26-07-651756399-05-30.png',
+                 caption: 'Car marketplace homepage with advanced search'
+               }
+     ]
+   }
 }
 
 const project = projectsData[slug]
