@@ -1,48 +1,59 @@
 <template>
-  <div class="relative">
+  <div class="relative py-4">
     <!-- Timeline Line -->
-    <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-500 to-accent-500"></div>
+    <div class="absolute left-3 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700" aria-hidden="true"></div>
 
     <!-- Timeline Items -->
     <div class="space-y-12">
       <div 
         v-for="(item, index) in experiences" 
         :key="index"
-        class="relative flex flex-col md:flex-row items-start md:items-center"
-        :class="index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'"
+        class="relative md:grid md:grid-cols-[1fr_auto_1fr] md:gap-x-10 items-start group"
       >
-        <!-- Timeline Dot -->
-        <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-8 h-8 bg-white dark:bg-gray-800 border-4 border-primary-500 rounded-full flex items-center justify-center z-10">
-          <div class="w-2 h-2 bg-primary-500 rounded-full"></div>
-        </div>
-
-        <!-- Content -->
+        <!-- Content Card -->
         <div 
-          class="ml-16 md:ml-0 md:w-5/12 card p-6"
-          :class="index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'"
+          :class="[
+            'ml-10 md:ml-0 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-primary-500/30 transition-all duration-300',
+            index % 2 === 0 ? 'md:col-start-3' : 'md:col-start-1 md:row-start-1'
+          ]"
         >
-          <div class="flex items-center justify-between mb-3">
-            <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium rounded-full">
+          <div 
+            class="flex flex-col md:flex-row md:items-center md:justify-between mb-3"
+            :class="{ 'md:flex-row-reverse': index % 2 === 0 }"
+          >
+            <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 text-sm font-semibold rounded-full self-start">
               {{ item.period }}
             </span>
-            <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">{{ item.type }}</span>
+            <span class="mt-2 md:mt-0 text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wider" :class="{ 'md:text-right': index % 2 !== 0 }">
+              {{ item.type }}
+            </span>
           </div>
           
-          <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">{{ item.position }}</h3>
-          <p class="text-primary-600 dark:text-primary-400 font-medium mb-3">{{ item.company }}</p>
-          <p class="text-gray-600 dark:text-gray-300 mb-4">{{ item.description }}</p>
+          <div :class="{ 'md:text-right': index % 2 !== 0 }">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-1">{{ item.position }}</h3>
+            <p class="text-primary-600 dark:text-primary-400 font-semibold mb-3">{{ item.company }}</p>
+          </div>
+
+          <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed" :class="{ 'md:text-right': index % 2 !== 0 }">
+            {{ item.description }}
+          </p>
           
-          <!-- Achievements -->
           <ul class="space-y-2">
             <li 
               v-for="achievement in item.achievements" 
               :key="achievement"
-              class="flex items-start space-x-2 text-sm text-gray-600 dark:text-gray-300"
+              class="flex items-start space-x-3 text-sm text-gray-600 dark:text-gray-400"
+              :class="{ 'md:justify-end md:flex-row-reverse md:space-x-reverse': index % 2 !== 0 }"
             >
-              <CheckCircle class="w-4 h-4 text-primary-500 mt-0.5 flex-shrink-0" />
+              <CheckCircle class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
               <span>{{ achievement }}</span>
             </li>
           </ul>
+        </div>
+
+        <!-- Timeline Dot -->
+        <div class="absolute md:relative left-3 md:left-auto top-5 md:top-8 transform -translate-x-1/2 md:transform-none md:col-start-2 md:row-start-1 flex items-center justify-center">
+          <div class="w-4 h-4 bg-white dark:bg-gray-900 border-4 border-primary-500 rounded-full transition-all duration-300 group-hover:scale-110 group-hover:border-accent-500 z-10"></div>
         </div>
       </div>
     </div>
